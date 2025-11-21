@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TCE Navigation System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #0e4c94, #ADD8E6); /* Deep TCE blue gradient */
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      margin-top: 30px;
+    }
+
+    header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 10px 0 5px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .user-btn {
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background-color: #ffffff;
+      color: #003b73;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .user-btn img {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 5px;
+    }
+
+    .user-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Inner call button inside visual impaired button */
+    .inner-call-btn {
+      margin-top: 10px;
+      background-color: #319e37;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 15px;
+      font-size: 16px;
+      font-weight: normal;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .inner-call-btn:hover {
+      background-color: #1bb225;
+      transform: scale(1.05);
+    }
+
+    .inside-text {
+      font-size: 14px;
+      font-weight: normal;
+      margin-top: 5px;
+      color: #333;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="TCE_Logo.gif" alt="TCE Logo" />
+    <h1>TCE Navigation System</h1>
+    <h2>Choose the below categories</h2>
+  </header>
+
+  <div class="buttons">
+    <!-- Normal User -->
+    <a class="user-btn" href="app-user-debug.apk" download>
+      <img src="Normal_User.jpg" alt="Normal User" />
+      Normal User
+    </a>
+
+    <!-- Wheelchair User -->
+    <a class="user-btn" href="wheelchair_user.apk" download>
+      <img src="wheelchair.png" alt="Wheelchair User" />
+      Wheelchair User
+    </a>
+
+    <!-- Deaf & Dumb User -->
+    <a class="user-btn" href="app-user-debug.apk" download>
+      <img src="Duff_Dumb.png" alt="Deaf & Dumb User" />
+      Deaf & Dumb User
+    </a>
+
+    <!-- Visual Impaired User -->
+    <div class="user-btn">
+      <img src="visual paired.png" alt="Visual Impaired User" />
+      Visual Impaired User
+      <a class="inner-call-btn" href="tel:+918217742310">📞 Call Assistant</a>
+    </div>
+  </div>
+
+</body>
+</html>
