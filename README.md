@@ -50,8 +50,8 @@ QR codes can be created for:
 
 ## 📦 Technologies Used
 
-- **HTML5, CSS3, JavaScript**
-- **QR.js / qrcode.js**
+- **HTML5, CSS3**
+- **Kotlin/Sceanview/Google Kit to build apk path file**
 - GitHub Pages for free hosting
 - Optional backend for data storage
 
@@ -130,4 +130,4 @@ If you need help integrating this with your **TCE Navigation App**, you can ask 
 
 ## 🏫 About TCE
 
-This project is developed for **Thiagarajar College of Engineering** to improve indoor navigation accessibility for all visitors, students, and staff.
+This project is developed for **Tontadarya College of Engineering** to improve indoor navigation accessibility for all visitors, students, and staff.
