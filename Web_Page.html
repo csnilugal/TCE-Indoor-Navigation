@@ -51,7 +51,6 @@
       align-items: center;
       justify-content: center;
       padding: 15px;
-      border: none;
       border-radius: 12px;
       background-color: #ffffff;
       color: #003b73;
@@ -60,6 +59,8 @@
       text-decoration: none;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
       transition: transform 0.2s, box-shadow 0.3s;
+      cursor: pointer;
+      border: none;
     }
 
     .user-btn img {
@@ -73,7 +74,43 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
     }
 
-    /* Inner call button inside visual impaired button */
+    /* Inner buttons that appear after user type click */
+    .user-options {
+      margin-top: 10px;
+      display: none; /* shown via JS */
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .inner-action-btn {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .inner-action-btn.primary {
+      background-color: #003b73;
+      color: #ffffff;
+    }
+
+    .inner-action-btn.secondary {
+      background-color: #e0e0e0;
+      color: #003b73;
+    }
+
+    .inner-action-btn:hover {
+      transform: scale(1.02);
+    }
+
+    /* Call button for visual impaired */
     .inner-call-btn {
       margin-top: 10px;
       background-color: #319e37;
@@ -85,6 +122,7 @@
       font-weight: normal;
       text-decoration: none;
       transition: 0.3s;
+      display: inline-block;
     }
 
     .inner-call-btn:hover {
@@ -99,6 +137,69 @@
       color: #333;
       opacity: 0.9;
     }
+
+    /* Building Route section */
+    .route-section {
+      max-width: 500px;
+      margin: 0 auto 40px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      text-align: left;
+    }
+
+    .route-section h3 {
+      margin-top: 0;
+      color: #003b73;
+      text-align: center;
+    }
+
+    .route-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .route-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #e0e0e0;
+      color: #003b73;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .route-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .route-details {
+      background-color: #f3f8ff;
+      border-radius: 10px;
+      padding: 12px 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .route-details-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #003b73;
+    }
+
+    .route-details-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .route-details-list li {
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -111,22 +212,76 @@
 
   <div class="buttons">
     <!-- Normal User -->
-    <a class="user-btn" href="app-user-debug.apk" download>
+    <div class="user-btn" onclick="toggleUserOptions('normal')">
       <img src="Normal_User.jpg" alt="Normal User" />
       Normal User
-    </a>
+      <div class="user-options" id="options-normal">
+        <!-- Download Navigation App button -->
+        <a
+          href="app-user-debug.apk"
+          download
+          class="inner-action-btn primary"
+          onclick="event.stopPropagation();"
+        >
+          Download Navigation App
+        </a>
+        <!-- Building Route button -->
+        <button
+          class="inner-action-btn secondary"
+          onclick="event.stopPropagation(); showBuildingRoute();"
+        >
+          Building Route
+        </button>
+      </div>
+    </div>
 
     <!-- Wheelchair User -->
-    <a class="user-btn" href="wheelchair_user.apk" download>
+    <div class="user-btn" onclick="toggleUserOptions('wheelchair')">
       <img src="wheelchair.png" alt="Wheelchair User" />
       Wheelchair User
-    </a>
+      <div class="user-options" id="options-wheelchair">
+        <!-- Download Navigation App button -->
+        <a
+          href="wheelchair_user.apk"
+          download
+          class="inner-action-btn primary"
+          onclick="event.stopPropagation();"
+        >
+          Download Navigation App
+        </a>
+        <!-- Building Route button -->
+        <button
+          class="inner-action-btn secondary"
+          onclick="event.stopPropagation(); showBuildingRoute();"
+        >
+          Building Route
+        </button>
+      </div>
+    </div>
 
     <!-- Deaf & Dumb User -->
-    <a class="user-btn" href="app-user-debug.apk" download>
+    <div class="user-btn" onclick="toggleUserOptions('deaf')">
       <img src="Duff_Dumb.png" alt="Deaf & Dumb User" />
       Deaf & Dumb User
-    </a>
+      <div class="user-options" id="options-deaf">
+        <!-- Download Navigation App button -->
+        <a
+          href="app-user-debug.apk"
+          download
+          class="inner-action-btn primary"
+          onclick="event.stopPropagation();"
+        >
+          Download Navigation App
+        </a>
+        <!-- Building Route button -->
+        <button
+          class="inner-action-btn secondary"
+          onclick="event.stopPropagation(); showBuildingRoute();"
+        >
+          Building Route
+        </button>
+      </div>
+    </div>
 
     <!-- Visual Impaired User -->
     <div class="user-btn">
@@ -136,5 +291,109 @@
     </div>
   </div>
 
+  <!-- Building Route section (hidden initially) -->
+  <div id="route-section" class="route-section" style="display: none;">
+    <h3>Main Blocks</h3>
+    <div class="route-buttons">
+      <button class="route-btn" onclick="showRouteDetails('main-entrance')">Main Entrance</button>
+      <button class="route-btn" onclick="showRouteDetails('branches')">Branches</button>
+      <button class="route-btn" onclick="showRouteDetails('library')">Library</button>
+      <button class="route-btn" onclick="showRouteDetails('auditorium')">Auditorium</button>
+      <button class="route-btn" onclick="showRouteDetails('lab')">Lab</button>
+    </div>
+    <div id="route-details" class="route-details">
+      <div class="route-details-title">
+        Select a block above to view building codes.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show/hide inner options (Download + Building Route) for each user type
+    function toggleUserOptions(type) {
+      const allOptions = document.querySelectorAll('.user-options');
+      allOptions.forEach(opt => {
+        opt.style.display = 'none';
+      });
+
+      const target = document.getElementById('options-' + type);
+      if (target) {
+        target.style.display = 'flex';
+      }
+    }
+
+    // Show the main "Building Route" section
+    function showBuildingRoute() {
+      const section = document.getElementById('route-section');
+      if (section) {
+        section.style.display = 'block';
+        const details = document.getElementById('route-details');
+        if (details) {
+          details.innerHTML = `
+            <div class="route-details-title">
+              Select a block above to view building codes.
+            </div>
+          `;
+        }
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Show the building_name : building-code info based on block type
+    function showRouteDetails(type) {
+      const details = document.getElementById('route-details');
+      if (!details) return;
+
+      let title = '';
+      let items = [];
+
+      if (type === 'main-entrance') {
+        title = 'Main Entrance';
+        items = [
+          'Main Entrance : 20',
+          'Office : 21',
+          'Principle Office : 22',
+          'Management Office : 23',
+          'Placement Office : 24'
+        ];
+      } else if (type === 'branches') {
+        title = 'Branches';
+        items = [
+          'Computer Science Department : 01',
+          'Electronic and Communication Department : 02',
+          'Electronic and Electrical Department : 03',
+          'Civil Department : 04',
+          'Mechanical Department : 05'
+        ];
+      } else if (type === 'library') {
+        title = 'Library';
+        items = [
+          'Library : 10'
+        ];
+      } else if (type === 'auditorium') {
+        title = 'Auditorium';
+        items = [
+          'Civil Seminar Hall : 127',
+          'Mechanical Seminar Hall : 103'
+        ];
+      } else if (type === 'lab') {
+        title = 'Lab';
+        items = [
+          'Cisco lab : 138'
+        ];
+      }
+
+      const listHtml = items
+        .map(item => `<li>${item}</li>`)
+        .join('');
+
+      details.innerHTML = `
+        <div class="route-details-title">${title}</div>
+        <ul class="route-details-list">
+          ${listHtml}
+        </ul>
+      `;
+    }
+  </script>
 </body>
 </html>
